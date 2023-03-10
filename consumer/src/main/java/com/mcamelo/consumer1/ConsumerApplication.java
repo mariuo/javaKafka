@@ -1,4 +1,4 @@
-package com.mcamelo.consumer;
+package com.mcamelo.consumer1;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

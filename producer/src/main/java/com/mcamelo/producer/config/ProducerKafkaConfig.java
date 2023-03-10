@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.kafka.config.TopicBuilder;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaAdmin;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -45,7 +46,16 @@ public class ProducerKafkaConfig {
 
     @Bean
     public NewTopic topic1(){
-        return new NewTopic("topic-1", 10, Short.valueOf("1"));
+//        return new NewTopic("topic-1", 10, Short.valueOf("1"));
+        return TopicBuilder.name("topic-1").build();
     }
+
+//    @Bean KafkaAdmin.NewTopics topics (){
+//        return new KafkaAdmin.NewTopics(
+//                TopicBuilder.name("topic-1").build(),
+//                TopicBuilder.name("topic-2").build(),
+//                TopicBuilder.name("topic-3").build()
+//        );
+//    }
 
 }

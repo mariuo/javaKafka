@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.mcamelo</groupId>
-	<artifactId>consumer1</artifactId>
+	<artifactId>consumer2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>consumer1</name>
+	<name>consumer2</name>
 	<description>Consumer Apache Kafka</description>
 	<properties>
 		<java.version>11</java.version>
