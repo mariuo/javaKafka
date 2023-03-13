@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @KafkaListener
-public @interface PersonCustomListem {
+public @interface PersonCustomListener {
     @AliasFor(annotation = KafkaListener.class, attribute = "groupId")
     String groupID() default "";
 
@@ -20,5 +20,5 @@ public @interface PersonCustomListem {
     String[] topics() default "person-topic";
 
     @AliasFor(annotation = KafkaListener.class, attribute = "containerFactory")
-    String containerFactory() default "personKafkaListenerContainerFactory";
+    String containerFactory() default "jsonKafkaListenerContainerFactory";
 }

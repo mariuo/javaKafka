@@ -1,5 +1,6 @@
 package com.mcamelo.producer.controller;
 
+import com.mcamelo.producer.model.City;
 import com.mcamelo.producer.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -33,11 +34,8 @@ public class TestController {
 //    }
     @GetMapping("/send")
     public void send() {
-        IntStream.range(0, 51)
-                .boxed()
-                .forEach(n -> {
-                    kafkaTemplate.send("topic-1", "Number: " + n);
-                });
+                    kafkaTemplate.send("topic-1", "Teste");
+
     }
 
     @GetMapping("/sendTopic")
@@ -49,5 +47,9 @@ public class TestController {
     @GetMapping("/sendPerson")
     public void sendPerson() {
         jsonKafkaTemplate.send("person-topic", new Person("Joao", 10));
+    }
+    @GetMapping("/sendCity")
+    public void sendCity() {
+        jsonKafkaTemplate.send("city-topic", new City("Montreal", "MTL"));
     }
 }
