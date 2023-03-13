@@ -19,7 +19,7 @@ public class TestController {
     @Autowired
     private KafkaTemplate<String, Serializable> jsonKafkaTemplate;
 
-//    @GetMapping("/send")
+    //    @GetMapping("/send")
 //    public ResponseEntity<?> send(){
 ////        kafkaTemplate.send("topic-1", "Send de: "+ LocalDateTime.now());
 //        IntStream.range(1,10)
@@ -32,12 +32,22 @@ public class TestController {
 //        return ResponseEntity.ok().build();
 //    }
     @GetMapping("/send")
-    public void send(){
-        kafkaTemplate.send("topic-1", "Hello world");
+    public void send() {
+        IntStream.range(0, 51)
+                .boxed()
+                .forEach(n -> {
+                    kafkaTemplate.send("topic-1", "Number: " + n);
+                });
+    }
+
+    @GetMapping("/sendTopic")
+    public void send2() {
+
+                    kafkaTemplate.send("my-topic", "My topic");
     }
 
     @GetMapping("/sendPerson")
-    public void sendPerson(){
+    public void sendPerson() {
         jsonKafkaTemplate.send("person-topic", new Person("Joao", 10));
     }
 }

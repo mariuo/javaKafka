@@ -4,22 +4,28 @@ import com.mcamelo.consumer1.custom.PersonCustomListem;
 import com.mcamelo.consumer1.model.Person;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.listener.adapter.ConsumerRecordMetadata;
+import org.springframework.kafka.annotation.TopicPartition;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.handler.annotation.Header;
+import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.stereotype.Component;
-
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.util.TimeZone;
 
 @Slf4j
 @Component
 public class TestListener1 {
 
-    @KafkaListener(topics = "topic-1", groupId = "group-1")
+    @KafkaListener(topics = "topic-1", groupId = "group-1", concurrency = "2")
     public void listen(String message){
-        log.info(message);
+        log.info("Thread: {} Message {} ", Thread.currentThread().getId(), message);
+    };
+
+    @KafkaListener(groupId = "my-group", topicPartitions = {@TopicPartition(topic="my-topic", partitions="0")} )
+    public void listen2(String message, @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition){
+        log.info("Partition 0: {} Message {} ", partition, message);
+    };
+    @KafkaListener(groupId = "my-group", topicPartitions = {@TopicPartition(topic="my-topic", partitions="1-9")} )
+    public void listen3(String message, @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition){
+        log.info("Partition 1-9: {} Message {} ", partition, message);
     };
 
 //    @KafkaListener(topics = "person-topic", groupId = "group-1", containerFactory = "personKafkaListenerContainerFactory")
@@ -39,6 +45,7 @@ public class TestListener1 {
         log.info("history: Thread: {} ", Thread.currentThread().getId());
         log.info("history: Person: {} ", person);
     };
+
 
 
 
