@@ -1,9 +1,6 @@
 package com.mcamelo.producer.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -11,6 +8,7 @@ import java.io.Serializable;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class Person implements Serializable {
     private String name;
     private Integer age;
